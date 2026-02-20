@@ -144,7 +144,3 @@ Works in all modern browsers that support:
 - CSS `@property`
 - `ResizeObserver`
 - `requestAnimationFrame`
-
-## License
-
-MIT
