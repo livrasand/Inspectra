@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inspectra — Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d0f1a;
+      color: #c8cfe8;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px;
+      gap: 48px;
+    }
+
+    header {
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #8ca0ff;
+      letter-spacing: 0.08em;
+    }
+
+    header p {
+      margin-top: 8px;
+      color: #5a6490;
+      font-size: 0.95rem;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .demo-card {
+      background: #12152a;
+      border: 1px solid #1e2340;
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .demo-card h2 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #5a6490;
+    }
+
+    /* Sample elements */
+    .sample-box {
+      width: 100%;
+      height: 140px;
+      background: linear-gradient(135deg, #1a1f3a 0%, #0d1020 100%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #3a4070;
+      font-size: 0.85rem;
+    }
+
+    .sample-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      color: #111;
+    }
+
+    .sample-card .airline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .sample-card .airline-icon {
+      width: 36px;
+      height: 36px;
+      background: #2563eb;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .sample-card .airline-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .sample-card .airline-code {
+      font-size: 0.75rem;
+      color: #888;
+    }
+
+    .sample-card .route {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .sample-card .route-item label {
+      font-size: 0.7rem;
+      color: #888;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .sample-card .route-item .code {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #111;
+    }
+
+    .sample-card .route-item .airport {
+      font-size: 0.72rem;
+      color: #555;
+    }
+
+    .sample-img {
+      width: 100%;
+      height: 160px;
+      background: linear-gradient(135deg, #1e2a5e 0%, #0a0d1a 100%);
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 7px 16px;
+      border-radius: 6px;
+      border: 1px solid #2a3060;
+      background: #1a1f3a;
+      color: #8ca0ff;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    button:hover {
+      background: #222850;
+      border-color: #4a5890;
+    }
+
+    button.active {
+      background: #2a3580;
+      border-color: #6373d2;
+      color: #c8d0ff;
+    }
+
+    .code-snippet {
+      background: #0a0c18;
+      border: 1px solid #1a1f38;
+      border-radius: 8px;
+      padding: 16px;
+      font-family: 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.78rem;
+      color: #7a9fff;
+      overflow-x: auto;
+      white-space: pre;
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .code-snippet .kw  { color: #c792ea; }
+    .code-snippet .fn  { color: #82aaff; }
+    .code-snippet .str { color: #c3e88d; }
+    .code-snippet .cm  { color: #546e7a; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>⬡ INSPECTRA</h1>
+    <p>AI element inspection visual effect — apply to any HTML element</p>
+  </header>
+
+  <div class="demo-grid">
+
+    <!-- Demo 1: plain box -->
+    <div class="demo-card">
+      <h2>Plain element</h2>
+      <div class="sample-box" id="box1">div element</div>
+      <div class="controls">
+        <button id="btn-box1-on">Inspect</button>
+        <button id="btn-box1-off">Remove</button>
+        <button id="btn-box1-pause">Pause</button>
+      </div>
+    </div>
+
+    <!-- Demo 2: card -->
+    <div class="demo-card">
+      <h2>Card element</h2>
+      <div class="sample-card" id="card1">
+        <div class="airline">
+          <div class="airline-icon">✈</div>
+          <div>
+            <div class="airline-name">American Airlines</div>
+            <div class="airline-code">100</div>
+          </div>
+        </div>
+        <div class="route">
+          <div class="route-item">
+            <label>Origin</label>
+            <div class="code">JFK</div>
+            <div class="airport">John F Kennedy Intl</div>
+          </div>
+          <div class="route-item">
+            <label>Destination</label>
+            <div class="code">LHR</div>
+            <div class="airport">Heathrow</div>
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="btn-card1-on">Inspect</button>
+        <button id="btn-card1-off">Remove</button>
+      </div>
+    </div>
+
+    <!-- Demo 3: image -->
+    <div class="demo-card">
+      <h2>Image element</h2>
+      <div class="sample-img" id="img1"></div>
+      <div class="controls">
+        <button id="btn-img1-on">Inspect</button>
+        <button id="btn-img1-off">Remove</button>
+        <button id="btn-img1-fast">Fast scan</button>
+      </div>
+    </div>
+
+    <!-- Demo 4: auto-inspect on hover -->
+    <div class="demo-card">
+      <h2>Hover to inspect</h2>
+      <div class="sample-box" id="hover-box" style="cursor:pointer;">hover me</div>
+      <div class="controls">
+        <span style="font-size:0.75rem;color:#3a4070;">Hover the element above</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Usage snippet -->
+  <div class="code-snippet"><span class="cm">/* ─────────────────────────────────────────────────────────────
+   INSPECTRA — AI Element Inspection Effect
+   ───────────────────────────────────────────────────────────── */</span>
+
+<span class="cm">/* ── 1. INSTALLATION ──────────────────────────────────────── */</span>
+
+<span class="cm">// Option A — CDN (no build step required)</span>
+&lt;script src=<span class="str">"https://cdn.jsdelivr.net/npm/inspectra/dist/inspectra.umd.min.js"</span>&gt;&lt;/script&gt;
+<span class="cm">// After loading, the global object "Inspectra" is available.</span>
+<span class="cm">// All methods are also destructurable: const { inspect, uninspect, inspectAll } = Inspectra;</span>
+
+<span class="cm">// Option B — NPM</span>
+<span class="cm">// $ npm install inspectra</span>
+<span class="kw">import</span> Inspectra <span class="kw">from</span> <span class="str">'inspectra'</span>;               <span class="cm">// default import (full object)</span>
+<span class="kw">import</span> { inspect, uninspect, inspectAll } <span class="kw">from</span> <span class="str">'inspectra'</span>; <span class="cm">// named imports</span>
+
+
+<span class="cm">/* ── 2. BASIC USAGE ───────────────────────────────────────── */</span>
+
+<span class="cm">// Pass a CSS selector string…</span>
+<span class="kw">const</span> ctrl = Inspectra.<span class="fn">inspect</span>(<span class="str">'#my-element'</span>);
+
+<span class="cm">// …or a direct DOM reference</span>
+<span class="kw">const</span> el   = document.<span class="fn">querySelector</span>(<span class="str">'.card'</span>);
+<span class="kw">const</span> ctrl = Inspectra.<span class="fn">inspect</span>(el);
+
+<span class="cm">// Remove the effect</span>
+Inspectra.<span class="fn">uninspect</span>(<span class="str">'#my-element'</span>);
+Inspectra.<span class="fn">uninspect</span>(el);
+
+<span class="cm">// Apply to every element matching a selector</span>
+<span class="kw">const</span> ctrls = Inspectra.<span class="fn">inspectAll</span>(<span class="str">'.ai-target'</span>); <span class="cm">// returns array of controls</span>
+ctrls.<span class="fn">forEach</span>(c =&gt; c.<span class="fn">destroy</span>());                  <span class="cm">// remove all at once</span>
+
+
+<span class="cm">/* ── 3. CONTROL OBJECT ────────────────────────────────────── */</span>
+<span class="cm">// inspect() returns a control object with three methods:</span>
+
+ctrl.<span class="fn">pause</span>();   <span class="cm">// freeze all animations (CSS + canvas particles)</span>
+ctrl.<span class="fn">resume</span>(); <span class="cm">// resume from where they stopped</span>
+ctrl.<span class="fn">destroy</span>(); <span class="cm">// remove the effect entirely and restore the original DOM</span>
+
+
+<span class="cm">/* ── 4. OPTIONS REFERENCE ─────────────────────────────────── */</span>
+<span class="cm">// All options are optional. Defaults shown below.</span>
+
+Inspectra.<span class="fn">inspect</span>(<span class="str">'#el'</span>, {
+
+  <span class="cm">// ── Layout ──────────────────────────────────────────────</span>
+  block: <span class="kw">false</span>,        <span class="cm">// Set to true to force the wrapper div to display:block.</span>
+                       <span class="cm">// Useful for elements like &lt;img&gt;, &lt;video&gt;, block cards, etc.</span>
+                       <span class="cm">// Default: false (wrapper is inline-block)</span>
+
+  paused: <span class="kw">false</span>,       <span class="cm">// Start with all animations paused immediately.</span>
+                       <span class="cm">// Call ctrl.resume() to start them later.</span>
+
+  <span class="cm">// ── Particles ───────────────────────────────────────────</span>
+  particles: <span class="num">4</span>,        <span class="cm">// Number of floating light dots orbiting the element.</span>
+                       <span class="cm">// Range: 0 (none) to ~40 (dense). Default: 4.</span>
+
+  color: [<span class="num">130</span>, <span class="num">150</span>, <span class="num">255</span>], <span class="cm">// RGB array for particles, ring glow, and sweep tint.</span>
+                       <span class="cm">// Default: [130, 150, 255] (blue-violet)</span>
+                       <span class="cm">// Example: [80, 220, 180] for teal, [255, 120, 80] for orange</span>
+
+  <span class="cm">// ── Global speed ────────────────────────────────────────</span>
+  speed: <span class="num">1</span>,            <span class="cm">// Multiplier applied to ALL animation durations at once.</span>
+                       <span class="cm">// 1   = default speed</span>
+                       <span class="cm">// 2   = 2× faster (more intense / urgent feel)</span>
+                       <span class="cm">// 0.5 = half speed (slower, more ambient / calm)</span>
+                       <span class="cm">// 0.2 = very slow, almost meditative</span>
+                       <span class="cm">// Note: individual duration options below override speed.</span>
+
+  <span class="cm">// ── Per-animation durations (override speed) ────────────</span>
+  sweepDuration:   <span class="str">'3.2s'</span>, <span class="cm">// Light band that scrolls top→bottom inside the element.</span>
+                          <span class="cm">// Shorter = faster sweep. Default: '3.2s'</span>
+
+  ringDuration:    <span class="str">'4s'</span>,   <span class="cm">// Rotating arc of light around the border.</span>
+                          <span class="cm">// Shorter = faster spin. Default: '4s'</span>
+
+  breatheDuration: <span class="str">'3.5s'</span>, <span class="cm">// Outer glow pulse (inhale/exhale rhythm).</span>
+                          <span class="cm">// Longer = slower, more relaxed breathing. Default: '3.5s'</span>
+
+  holeDuration:    <span class="str">'4s'</span>,   <span class="cm">// Edge vignette opacity cycle.</span>
+                          <span class="cm">// Default: '4s'</span>
+});
+
+
+<span class="cm">/* ── 5. COMMON RECIPES ────────────────────────────────────── */</span>
+
+<span class="cm">// Urgent / fast AI analysis feel</span>
+Inspectra.<span class="fn">inspect</span>(<span class="str">'#el'</span>, { speed: <span class="num">2.5</span>, particles: <span class="num">12</span> });
+
+<span class="cm">// Calm ambient highlight</span>
+Inspectra.<span class="fn">inspect</span>(<span class="str">'#el'</span>, { speed: <span class="num">0.4</span>, particles: <span class="num">3</span>, color: [<span class="num">100</span>, <span class="num">180</span>, <span class="num">255</span>] });
+
+<span class="cm">// Hover-to-inspect pattern</span>
+el.<span class="fn">addEventListener</span>(<span class="str">'mouseenter'</span>, () =&gt; Inspectra.<span class="fn">inspect</span>(el));
+el.<span class="fn">addEventListener</span>(<span class="str">'mouseleave'</span>, () =&gt; Inspectra.<span class="fn">uninspect</span>(el));
+
+<span class="cm">// Inspect, then auto-remove after 3 seconds</span>
+<span class="kw">const</span> ctrl = Inspectra.<span class="fn">inspect</span>(<span class="str">'#el'</span>);
+<span class="fn">setTimeout</span>(() =&gt; ctrl.<span class="fn">destroy</span>(), <span class="num">3000</span>);
+
+<span class="cm">// Block element (image, card, full-width div)</span>
+Inspectra.<span class="fn">inspect</span>(<span class="str">'#hero-image'</span>, { block: <span class="kw">true</span>, particles: <span class="num">8</span> });
+
+<span class="cm">// Custom teal color, slow sweep, fast ring</span>
+Inspectra.<span class="fn">inspect</span>(<span class="str">'#el'</span>, {
+  color:         [<span class="num">60</span>, <span class="num">220</span>, <span class="num">180</span>],
+  sweepDuration: <span class="str">'6s'</span>,
+  ringDuration:  <span class="str">'1.5s'</span>,
+});</div>
+
+  <!-- Load library from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/inspectra/dist/inspectra.umd.min.js"></script>
+  <script>
+    const { inspect, uninspect } = Inspectra;
+
+    // Box 1
+    let ctrl1;
+    document.getElementById('btn-box1-on').addEventListener('click', () => {
+      ctrl1 = inspect('#box1');
+    });
+    document.getElementById('btn-box1-off').addEventListener('click', () => {
+      uninspect('#box1');
+      ctrl1 = null;
+    });
+    document.getElementById('btn-box1-pause').addEventListener('click', function() {
+      if (!ctrl1) return;
+      const paused = this.classList.toggle('active');
+      paused ? ctrl1.pause() : ctrl1.resume();
+      this.textContent = paused ? 'Resume' : 'Pause';
+    });
+
+    // Card 1
+    document.getElementById('btn-card1-on').addEventListener('click', () => {
+      inspect('#card1', { block: true });
+    });
+    document.getElementById('btn-card1-off').addEventListener('click', () => {
+      uninspect('#card1');
+    });
+
+    // Image
+    document.getElementById('btn-img1-on').addEventListener('click', () => {
+      inspect('#img1', { block: true });
+    });
+    document.getElementById('btn-img1-off').addEventListener('click', () => {
+      uninspect('#img1');
+    });
+    document.getElementById('btn-img1-fast').addEventListener('click', () => {
+      inspect('#img1', { block: true, particles: 30, color: [160, 200, 255] });
+    });
+
+    // Hover demo
+    const hoverBox = document.getElementById('hover-box');
+    let hoverCtrl;
+    hoverBox.addEventListener('mouseenter', () => {
+      hoverCtrl = inspect(hoverBox);
+    });
+    hoverBox.addEventListener('mouseleave', () => {
+      if (hoverCtrl) { hoverCtrl.destroy(); hoverCtrl = null; }
+    });
+  </script>
+</body>
+</html>

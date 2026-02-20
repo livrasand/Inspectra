@@ -1,0 +1,56 @@
+{
+  "name": "inspectra",
+  "version": "1.0.0",
+  "description": "AI element inspection visual effect — floating particles, glowing border, sweep and vignette overlay for any HTML element",
+  "main": "dist/inspectra.umd.js",
+  "module": "dist/inspectra.esm.js",
+  "browser": "dist/inspectra.umd.min.js",
+  "unpkg": "dist/inspectra.umd.min.js",
+  "jsdelivr": "dist/inspectra.umd.min.js",
+  "exports": {
+    ".": {
+      "import": "./dist/inspectra.esm.js",
+      "require": "./dist/inspectra.umd.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node serve.js",
+    "prepublishOnly": "node build.js"
+  },
+  "keywords": [
+    "ai",
+    "inspector",
+    "highlight",
+    "scanner",
+    "element",
+    "effect",
+    "overlay",
+    "animation",
+    "particles",
+    "glow",
+    "border",
+    "visual-effect",
+    "dom",
+    "vanilla-js"
+  ],
+  "author": {
+    "name": "Livrädo Sandoval",
+    "url": "https://github.com/livrasand"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/livrasand/Inspectra.git"
+  },
+  "homepage": "https://github.com/livrasand/Inspectra#readme",
+  "bugs": {
+    "url": "https://github.com/livrasand/Inspectra/issues"
+  },
+  "sideEffects": false
+}
