@@ -189,6 +189,119 @@
     .code-snippet .fn  { color: #82aaff; }
     .code-snippet .str { color: #c3e88d; }
     .code-snippet .cm  { color: #546e7a; }
+    .code-snippet .num { color: #f78c6c; }
+
+    /* Profile card */
+    .sample-profile {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #111;
+    }
+    .sample-profile .avatar {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.4rem; font-weight: 700; flex-shrink: 0;
+    }
+    .sample-profile .name { font-weight: 700; font-size: 0.95rem; }
+    .sample-profile .role { font-size: 0.75rem; color: #888; margin-top: 2px; }
+    .sample-profile .badge {
+      margin-top: 6px; display: inline-block;
+      background: #ecfdf5; color: #059669;
+      font-size: 0.68rem; font-weight: 600;
+      padding: 2px 8px; border-radius: 99px;
+    }
+
+    /* Stats row */
+    .sample-stats {
+      background: #0f172a;
+      border-radius: 10px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      text-align: center;
+    }
+    .sample-stats .stat-val {
+      font-size: 1.4rem; font-weight: 800;
+      background: linear-gradient(135deg, #34d399, #059669);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .sample-stats .stat-lbl {
+      font-size: 0.65rem; color: #4b5563; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.08em;
+    }
+
+    /* Form */
+    .sample-form {
+      background: #1e1b4b;
+      border-radius: 10px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .sample-form label { font-size: 0.72rem; color: #a5b4fc; }
+    .sample-form input {
+      background: #312e81; border: 1px solid #4338ca;
+      border-radius: 6px; padding: 8px 12px;
+      color: #e0e7ff; font-size: 0.85rem; outline: none; width: 100%;
+    }
+    .sample-form .submit-btn {
+      background: #4f46e5; border: none; border-radius: 6px;
+      padding: 9px; color: #fff; font-size: 0.85rem;
+      cursor: pointer; font-weight: 600; margin-top: 4px;
+    }
+
+    /* Table */
+    .sample-table {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 100%;
+      font-size: 0.78rem;
+      color: #111;
+      border-collapse: collapse;
+    }
+    .sample-table thead { background: #f97316; color: #fff; }
+    .sample-table th, .sample-table td { padding: 8px 12px; text-align: left; }
+    .sample-table tbody tr:nth-child(even) { background: #fff7ed; }
+    .sample-table tbody tr:nth-child(odd)  { background: #fff; }
+
+    /* Alert / notification */
+    .sample-alert {
+      background: #1c1917;
+      border-left: 3px solid #f59e0b;
+      border-radius: 8px;
+      padding: 14px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .sample-alert .icon { font-size: 1.2rem; flex-shrink: 0; }
+    .sample-alert .title { font-size: 0.85rem; font-weight: 600; color: #fbbf24; }
+    .sample-alert .msg   { font-size: 0.75rem; color: #78716c; margin-top: 3px; }
+
+    /* Button group */
+    .sample-btn-group {
+      display: flex; flex-direction: column; gap: 10px; align-items: flex-start;
+    }
+    .sample-big-btn {
+      padding: 12px 28px; border-radius: 8px; border: none;
+      font-size: 0.9rem; font-weight: 700; cursor: default;
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+      color: #fff; letter-spacing: 0.04em;
+    }
+    .sample-tag {
+      display: inline-flex; gap: 6px; flex-wrap: wrap;
+    }
+    .sample-tag span {
+      padding: 4px 10px; border-radius: 99px; font-size: 0.72rem; font-weight: 600;
+    }
   </style>
 </head>
 <body>
@@ -258,6 +371,116 @@
       <div class="sample-box" id="hover-box" style="cursor:pointer;">hover me</div>
       <div class="controls">
         <span style="font-size:0.75rem;color:#3a4070;">Hover the element above</span>
+      </div>
+    </div>
+
+    <!-- Demo 5: profile card — violet/purple theme -->
+    <div class="demo-card">
+      <h2>Profile card — violet</h2>
+      <div class="sample-profile" id="profile1">
+        <div class="avatar">L</div>
+        <div>
+          <div class="name">Livrädo Sandoval</div>
+          <div class="role">Full Stack Developer</div>
+          <span class="badge">● Online</span>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="btn-profile1-on">Inspect</button>
+        <button id="btn-profile1-off">Remove</button>
+      </div>
+    </div>
+
+    <!-- Demo 6: stats widget — teal/green theme -->
+    <div class="demo-card">
+      <h2>Stats widget — teal</h2>
+      <div class="sample-stats" id="stats1">
+        <div>
+          <div class="stat-val">98.2%</div>
+          <div class="stat-lbl">Uptime</div>
+        </div>
+        <div>
+          <div class="stat-val">4.2ms</div>
+          <div class="stat-lbl">Latency</div>
+        </div>
+        <div>
+          <div class="stat-val">1.4M</div>
+          <div class="stat-lbl">Requests</div>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="btn-stats1-on">Inspect</button>
+        <button id="btn-stats1-off">Remove</button>
+        <button id="btn-stats1-slow">Slow scan</button>
+      </div>
+    </div>
+
+    <!-- Demo 7: form — indigo theme -->
+    <div class="demo-card">
+      <h2>Form element — indigo</h2>
+      <div class="sample-form" id="form1">
+        <label>Email address</label>
+        <input type="email" placeholder="you@example.com" />
+        <label>Password</label>
+        <input type="password" placeholder="••••••••" />
+        <button class="submit-btn">Sign in</button>
+      </div>
+      <div class="controls">
+        <button id="btn-form1-on">Inspect</button>
+        <button id="btn-form1-off">Remove</button>
+      </div>
+    </div>
+
+    <!-- Demo 8: table — orange theme -->
+    <div class="demo-card">
+      <h2>Table element — orange</h2>
+      <table class="sample-table" id="table1">
+        <thead>
+          <tr><th>Model</th><th>Accuracy</th><th>Speed</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>GPT-4o</td><td>94.1%</td><td>Fast</td></tr>
+          <tr><td>Claude 3.5</td><td>93.8%</td><td>Fast</td></tr>
+          <tr><td>Gemini 1.5</td><td>91.2%</td><td>Medium</td></tr>
+        </tbody>
+      </table>
+      <div class="controls">
+        <button id="btn-table1-on">Inspect</button>
+        <button id="btn-table1-off">Remove</button>
+      </div>
+    </div>
+
+    <!-- Demo 9: alert — amber/warm theme -->
+    <div class="demo-card">
+      <h2>Alert / notification — amber</h2>
+      <div class="sample-alert" id="alert1">
+        <div class="icon">⚠️</div>
+        <div>
+          <div class="title">Anomaly detected</div>
+          <div class="msg">Unusual activity found in sector 7. AI is analyzing the pattern.</div>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="btn-alert1-on">Inspect</button>
+        <button id="btn-alert1-off">Remove</button>
+        <button id="btn-alert1-fast">Urgent</button>
+      </div>
+    </div>
+
+    <!-- Demo 10: button + tags — pink/magenta theme -->
+    <div class="demo-card">
+      <h2>Button + tags — pink</h2>
+      <div class="sample-btn-group">
+        <button class="sample-big-btn" id="bigbtn1">Generate ✦</button>
+        <div class="sample-tag">
+          <span style="background:#fdf2f8;color:#be185d;">design</span>
+          <span style="background:#fdf2f8;color:#9d174d;">ai</span>
+          <span style="background:#fdf4ff;color:#7e22ce;">visual</span>
+        </div>
+      </div>
+      <div class="controls">
+        <button id="btn-bigbtn1-on">Inspect button</button>
+        <button id="btn-bigbtn1-off">Remove</button>
       </div>
     </div>
 
@@ -425,6 +648,60 @@ Inspectra.<span class="fn">inspect</span>(<span class="str">'#el'</span>, {
     });
     hoverBox.addEventListener('mouseleave', () => {
       if (hoverCtrl) { hoverCtrl.destroy(); hoverCtrl = null; }
+    });
+
+    // Profile card — violet/purple
+    document.getElementById('btn-profile1-on').addEventListener('click', () => {
+      inspect('#profile1', { block: true, color: [160, 120, 255], particles: 6, speed: 0.8 });
+    });
+    document.getElementById('btn-profile1-off').addEventListener('click', () => {
+      uninspect('#profile1');
+    });
+
+    // Stats widget — teal/green
+    document.getElementById('btn-stats1-on').addEventListener('click', () => {
+      inspect('#stats1', { block: true, color: [52, 211, 153], particles: 8, speed: 1.2 });
+    });
+    document.getElementById('btn-stats1-off').addEventListener('click', () => {
+      uninspect('#stats1');
+    });
+    document.getElementById('btn-stats1-slow').addEventListener('click', () => {
+      inspect('#stats1', { block: true, color: [52, 211, 153], particles: 3, speed: 0.3 });
+    });
+
+    // Form — indigo
+    document.getElementById('btn-form1-on').addEventListener('click', () => {
+      inspect('#form1', { block: true, color: [99, 102, 241], particles: 5, breatheDuration: '5s' });
+    });
+    document.getElementById('btn-form1-off').addEventListener('click', () => {
+      uninspect('#form1');
+    });
+
+    // Table — orange
+    document.getElementById('btn-table1-on').addEventListener('click', () => {
+      inspect('#table1', { block: true, color: [249, 115, 22], particles: 6, ringDuration: '3s' });
+    });
+    document.getElementById('btn-table1-off').addEventListener('click', () => {
+      uninspect('#table1');
+    });
+
+    // Alert — amber, fast + many particles
+    document.getElementById('btn-alert1-on').addEventListener('click', () => {
+      inspect('#alert1', { block: true, color: [245, 158, 11], particles: 5, speed: 1 });
+    });
+    document.getElementById('btn-alert1-off').addEventListener('click', () => {
+      uninspect('#alert1');
+    });
+    document.getElementById('btn-alert1-fast').addEventListener('click', () => {
+      inspect('#alert1', { block: true, color: [239, 68, 68], particles: 14, speed: 3 });
+    });
+
+    // Big button — pink/magenta
+    document.getElementById('btn-bigbtn1-on').addEventListener('click', () => {
+      inspect('#bigbtn1', { color: [236, 72, 153], particles: 10, speed: 1.4 });
+    });
+    document.getElementById('btn-bigbtn1-off').addEventListener('click', () => {
+      uninspect('#bigbtn1');
     });
   </script>
 </body>
